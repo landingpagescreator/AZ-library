@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        
+        th, td {
+        padding: 10px;
+        color: white;
+        }
+        table tr {
+            margin: 10px 0;
+        }
+
+        body {
+            background: url(OIP.jpeg) center center/cover no-repeat;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+        }
+
+        table {
+          background-color: rgba(167, 99, 99, 0.726);
+          border: white 2px solid;
+          border-radius: 30px;
+        }
+
+        input {
+            width: 100%;
+            border: none;
+        }
+    </style>
+    
+</head>
+<body>
+    <form action="login.php" method="post">
+    <h1 style="text-align: center;">Bienvenue</h1>
+    <table width="700px" style="margin: auto; padding: 10px;">
+        <tr>
+            <td colspan="2" style="text-align: center;"> <img width="70px" height="70px" src="/user.png" alt=""> </td> 
+        </tr>
+        <tr>
+            <td style="width: 25%;"> Email:</td>
+            <td bgcolor="white"> <input type="email" id="email" name="email"> </td> 
+        </tr>
+        <tr> 
+            <td style="width: 25%;"> Mot de passe:</td>
+            <td bgcolor="white"> <input type="password" id="modpass" name="password"> </td>
+        </tr>
+        <tr id="msgLine"></tr>
+        <tr>
+            <td>  </td>
+            <td> <button id="envoyer" type="submit" onclick="return validation_login()">Envoyer</button> <button>Effacer</button> </td> 
+        </tr>
+        <tr>
+            <td> </td>
+            <td> <a style="color: white;" href="inscription.html">S'inscrire</a>  </td> 
+        </tr>
+    </table>
+</form>
+
+    <script>
+        function validation_login() {
+            var emailVal = document.getElementById("email").value;
+            var modpassVal = document.getElementById("modpass").value;
+            // solution 1
+            // if (emailVal == "" || modpassVal == "") {
+            //     alert("Email or Password are empty!");
+            //     return false;
+            // } else {
+            //     alert("Très bien");
+            //     return true;
+            // }
+
+            // solution 2
+            document.getElementById("msgLine").innerHTML = "";
+            if (emailVal == "" && modpassVal == "") {
+                document.getElementById("msgLine").innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Entrez votre email et mot de passe</td>";
+                return false;
+            } else if (emailVal == "") {
+                document.getElementById("msgLine").innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Entrez votre email</td>";
+                return false;
+            } else if (modpassVal == "") {
+                document.getElementById("msgLine").innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Entrez votre mot de passe</td>";
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

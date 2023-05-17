@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title> Inscription </title>
+   <style>
+    body {
+          background: url(OIP.jpeg) center center/cover no-repeat;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+        }
+        table {
+          background-color: rgba(167, 99, 99, 0.726);
+        }
+        input {
+          width: 90%;
+          border: none;
+        }
+        input[name='sexe'] {
+          width: fit-content;
+        }
+        td {
+          color: white;
+        }
+   </style>
+
+  
+</head>
+<body>
+  <h1 style="text-align: center;">Créer un compte</h1>
+
+  <form action="inscription.php" method="post">
+  <table width="75%" style="margin: auto; padding: 10px; border: 1px solid grey;">
+    <tr> 
+      <td> Nom:  </td>
+      <td ><input type="text" id="nom" class="textChamp" name="nom">  </td>
+    </tr>
+    <tr class="redMessage"></tr>
+    <tr>
+      <td> Prénom: </td>
+      <td ><input type="text" id="prenom" class="textChamp" name="prenom"> </td> 
+    </tr>
+    <tr class="redMessage"></tr>
+    <tr>
+      <td> Age: </td>
+      <td ><input type="number" id="age" name="age"> </td> 
+    </tr>
+    <tr class="redMessage"></tr>
+    <tr> 
+      <td> Wilaya: </td>
+      <td> <select name="wilaya" id="wilaya">
+        <option value="setif">Sétif</option>
+        <option value="alger">Alger</option>
+        <option value="oran">Oran</option>
+      </select> </td>
+    </tr>
+    <tr>
+      <td> Téléphone: </td>
+      <td ><input type="text" id="telephone" name="telephone"></td> 
+    </tr>
+    <tr class="redMessage"></tr>
+    <tr>
+      <td> Email:  </td>
+      <td ><input type="email" id="email" class="textChamp" name="email"></td> 
+    </tr>
+    <tr class="redMessage"></tr>
+    <tr> 
+      <td> Adresse:  </td>
+      <td  style="height: 100px;"><input type="text" id="addresse" class="textChamp" name="adresse"></td>
+    </tr>
+    <tr class="redMessage"></tr>
+    <tr>
+      <td> Mot de passe:  </td>
+      <td><input type="password" id="motdepass" name="password"></td> 
+    </tr>
+    <tr class="redMessage"></tr>
+    <tr>
+      <td> Confirmer le mot de passe: </td>
+      <td><input type="password" id="confmotdepass"></td> 
+    </tr>
+    <tr class="redMessage"></tr>
+<tr> 
+      <td> Sexe:  </td>
+      <td> 
+        <input type="radio" value="homme" name="sexe" class="sexe">
+        <label for="homme">Homme</label> 
+        <input type="radio" value="femme" name="sexe" class="sexe">
+        <label for="femme">Femme</label>
+
+      </td>
+    </tr>
+    <tr>
+      <td>  </td>
+      <td>
+        <!-- <input type="submit" id="envoyer" value="Envoyer" onclick="return validation_infos()"> -->
+        <button type="submit" id="envoyer" onclick="return validation_infos()"> Envoyer </button>
+
+        <button>Effacer</button>
+      </td> 
+    </tr>
+  </table>
+</form>
+
+<script>
+  function validation_infos() {
+    var nom = document.getElementById("nom").value;
+    var prenom = document.getElementById("prenom").value;
+    var age = document.getElementById("age").value;
+    var wilaya = document.getElementById("wilaya").value;
+    var telephone = document.getElementById("telephone").value;
+    var email = document.getElementById("email").value;
+    var addresse = document.getElementById("addresse").value;
+    var motdepass = document.getElementById("motdepass").value;
+    var confmotdepass = document.getElementById("confmotdepass").value;
+    var sexe = document.getElementsByClassName("sexe");
+    var sexeVal;
+    for (var j=0; j<sexe.length; j++) {
+      if (sexe[j].checked) {
+        sexeVal = sexe[j].value;
+      }
+    }
+    
+    var tabRedMsg = document.getElementsByClassName("redMessage");
+    // console.log(tabRedMsg);
+    for (var i=0; i<tabRedMsg.length; i++) {
+      tabRedMsg[i].innerHTML = "";
+    }
+
+    if (nom == "") {
+      tabRedMsg[0].innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Entrez votre nom</td>";
+      return false;
+    }
+    if (prenom == "") {
+      tabRedMsg[1].innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Entrez votre prenom</td>";
+      return false;
+    }
+    if (isNaN(age) || age < 17 || age > 100) {
+      tabRedMsg[2].innerHTML = "<td colspan='2' style='color:red; text-align: center;'> L'age doit etre entre 17 et 100 </td>";
+      return false;
+    }
+    if (isNaN(telephone) || telephone.length != 10 && telephone.length != 9) {
+      tabRedMsg[3].innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Le Num telephone compose de 9 ou 10 chiffres </td>";
+      return false;
+    }
+    if (email == "") {
+      tabRedMsg[4].innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Entrez votre email </td>";
+      return false;
+    }
+    if (addresse == "") {
+      tabRedMsg[5].innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Entrez votre adresse </td>";
+      return false;
+    }
+    if (motdepass.length < 8 || motdepass == "") {
+      tabRedMsg[6].innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Le mot de passe au moins 8 caractères </td>";
+      return false;
+    }
+    if (confmotdepass != motdepass) {
+      tabRedMsg[7].innerHTML = "<td colspan='2' style='color:red; text-align: center;'> Les mots de passe ne sont pas identiques </td>";
+      return false;
+    }
+    if(confirm("Wilaya: " + wilaya + " ?") && confirm("Sexe: " + sexeVal + " ?")) {
+      return true;
+    } else {
+      return false;
+    }
+}
+
+    
+</script>
+</body>
+</html>
